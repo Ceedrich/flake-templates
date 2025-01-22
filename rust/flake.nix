@@ -13,6 +13,7 @@
       in
       {
         devShells.default = pkgs.mkShell {
+          name = "rust";
           buildInputs = with pkgs; [ rustc rust-analyzer cargo ];
         };
       }
