@@ -11,6 +11,8 @@ pkgs.mkShell rec {
     [
       bevy_cli
       rustToolchain
+      cargo-generate
+
       udev
       alsa-lib-with-plugins
       vulkan-loader
