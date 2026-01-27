@@ -9,6 +9,7 @@ pkgs.mkShell rec {
   ];
   buildInputs = with pkgs;
     [
+      bevy_cli
       rustToolchain
       udev
       alsa-lib-with-plugins
@@ -19,6 +20,7 @@ pkgs.mkShell rec {
       xorg.libXrandr # To use the x11 feature
       libxkbcommon
       wayland # To use the wayland feature
+      wasm-bindgen-cli
     ]
     ++ extraPackages;
   LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
