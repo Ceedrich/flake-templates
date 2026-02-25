@@ -7,6 +7,10 @@
         path = ./bevy;
         description = "Bevy template";
       };
+      rust = {
+        path = ./rust;
+        description = "Rust template";
+      };
     };
   };
 }
