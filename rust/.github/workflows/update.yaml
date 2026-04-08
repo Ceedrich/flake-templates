@@ -1,3 +1,4 @@
+# To use this github workflow make sure to enable _Allow GitHub Actions to create and approve pull requests_ in `Settings -> Actions -> General`
 name: Update flake.lock and rust-toolchain.toml
 on:
   workflow_dispatch:
