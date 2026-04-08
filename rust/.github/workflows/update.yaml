@@ -1,13 +1,39 @@
-name: Update flake.lock
+name: Update flake.lock and rust-toolchain.toml
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 3 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   update-flake-lock-and-rust-toolchain:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/update-flake-lock@main
+      - uses: DeterminateSystems/nix-installer-action@v22
+      - name: update flake.lock
+        run: nix flake update
+      - name: update rust-toolchain.toml
+        run: |
+          sed -i -r 's/nightly-[0-9]{4}-[0-9]{2}-[0-9]{2}/'"$(date --date="-2 days" +'%Y-%m-%d')"'/' rust-toolchain.toml
+      - id: create-pr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: "chore: update flake.lock and rust-toolchain.toml"
+          add-paths: |
+            flake.lock
+            rust-toolchain.toml
+          branch: automated/update-flake-lock-and-rust-toolchain
+          title: "Update flake.lock and rust-toolchain.toml"
+          body: |
+            This PR was automatically created by a GitHub Action.
+          base: main # TODO: change base branch to whatever you want
+          delete-branch: true
+      - name: Merge
+        run: gh pr merge --auto "${{ steps.create-pr.outputs.pull-request-number }}" --rebase
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        if: ${{ steps.create-pr.outputs.pull-request-number != '' }}
