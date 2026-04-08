@@ -19,7 +19,7 @@ jobs:
         run: nix flake update
       - name: update rust-toolchain.toml
         run: |
-          sed -i -r 's/nightly-[0-9]{4}-[0-9]{2}-[0-9]{2}/'"$(date --date="-2 days" +'%Y-%m-%d')"'/' rust-toolchain.toml
+          sed -i -r 's/nightly-[0-9]{4}-[0-9]{2}-[0-9]{2}/nightly-'"$(date --date="-2 days" +'%Y-%m-%d')"'/' rust-toolchain.toml
       - id: create-pr
         uses: peter-evans/create-pull-request@v8
         with:
