@@ -16,6 +16,7 @@
 
           ## Usage
           Develop normally with `cargo`. Nix builds are cached using [naersk](github.com/nix-community/naersk).
+          To use github workflows make sure to enable _Allow GitHub Actions to create and approve pull requests_ in `Settings -> Actions -> General`
 
           ## Getting started
           Run `cargo init` and commit your files to start programming 🦀.
