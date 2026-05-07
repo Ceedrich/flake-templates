@@ -22,6 +22,10 @@
           Run `cargo init` and commit your files to start programming 🦀.
         '';
       };
+      cpp = {
+        path = ./cpp;
+        description = "C++ template";
+      };
     };
   };
 }
